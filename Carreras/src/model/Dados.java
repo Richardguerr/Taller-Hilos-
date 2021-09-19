@@ -5,8 +5,6 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import Runner.Run_Game;
-import model.Game;
 
 public class Dados {
 	
@@ -15,7 +13,7 @@ public class Dados {
 	public static int acumuladop1;
 	public static int acumuladop2;
 	private static Random random = new Random();
-	private static Run_Game run_Game = new Run_Game();
+
 	public static int contador_tirosp1=1;
 	public static int contador_tirosp2=1;
 	public static int contador_pn=0;
@@ -184,12 +182,12 @@ public static int comprobarDadoDos(int name_Dado, JLabel p_d2) {
 
 		if (acumuladop1 < acumuladop2){
 
-			p1.setText("Posición 2");
-			p2.setText("Posición 1");
+			p1.setText("Posicion 2");
+			p2.setText("Posicion 1");
 			
 		}else {
-			p1.setText("Posición 1");
-			p2.setText("Posición 2");
+			p1.setText("Posicion 1");
+			p2.setText("Posicion 2");
 		}
 
 	}

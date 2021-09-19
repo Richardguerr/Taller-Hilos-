@@ -14,7 +14,7 @@ public class Run_Game {
 	 public static int porcentajep2;
 	private static double segundos;
 	private static int numone,numtwo;
-	private static Dados dados= new model.Dados();
+	
 	private static Game game = new Game(); 
 	
 	 

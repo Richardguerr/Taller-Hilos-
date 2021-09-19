@@ -1,7 +1,6 @@
 package model;
 
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,6 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class Pistas extends JFrame {
 
 	private JPanel contentPane;
@@ -22,25 +22,8 @@ public class Pistas extends JFrame {
 	private static Pistas panelPistas = new Pistas();
 	
 	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Pistas frame = new Pistas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	/*
+	
 	 */
 	public Pistas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

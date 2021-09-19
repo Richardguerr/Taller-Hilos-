@@ -3,7 +3,6 @@ package model;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import model.Dados;
 
 public class Crear_Jugador implements Runnable {
 	
@@ -15,7 +14,7 @@ public class Crear_Jugador implements Runnable {
 	private double segundos;
 	private int contador;
 	
-	private static Dados dados= new Dados();
+	
 	
 	public Crear_Jugador(JLabel img_dado_uno,JLabel img_dado_dos,JLabel resultado_p , JLabel resultado_pa_p,double segundos,int numuno,int numdos,
 			int contador, JLabel etiqueta , Game game ) {
@@ -39,7 +38,7 @@ public class Crear_Jugador implements Runnable {
 	public void run() {
 		int auto1=0;
 		int auto2=0;
-		int i=0;
+		
 
 		while (true){
 			
@@ -51,7 +50,6 @@ public class Crear_Jugador implements Runnable {
 			auto2=game.getSecondCar().getLocation().x;
 			
 			if(auto1 < game.getMeta().getLocation().x-200 && auto2 < game.getMeta().getLocation().x-200) {
-				System.out.println("CONTADO CARRO 1:" + Dados.contador_pn);
 				etiqueta.setLocation(etiqueta.getLocation().x+(Dados.contador_pn*3), etiqueta.getLocation().y);
 				game.repaint();
 				
@@ -64,7 +62,7 @@ public class Crear_Jugador implements Runnable {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-			i++;
+			
 		}
 		
 		if (etiqueta.getLocation().x>=game.getMeta().getLocation().x-200) {
