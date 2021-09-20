@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 public class Pistas extends JFrame {
 
 	private JPanel contentPane;
-	private static JLabel lbl_Car_1,lbl_Car_2,lbl_Meta;
+	public static JLabel lbl_Car_1,lbl_Car_2,lbl_Meta;
 	private static Pistas panelPistas = new Pistas();
 	
 	
@@ -47,12 +47,12 @@ public class Pistas extends JFrame {
 		
 		lbl_Car_1 = new JLabel("");
 		lbl_Car_1.setIcon(new ImageIcon(Pistas.class.getResource("/imagenes/carro_1.png")));
-		lbl_Car_1.setBounds(19, 35, 208, 92);
+		lbl_Car_1.setBounds(19, 35, 319, 165);
 		pista.add(lbl_Car_1);
 		
 		lbl_Car_2 = new JLabel("");
 		lbl_Car_2.setIcon(new ImageIcon(Pistas.class.getResource("/imagenes/carro_2.png")));
-		lbl_Car_2.setBounds(22, 274, 205, 98);
+		lbl_Car_2.setBounds(22, 224, 344, 148);
 		pista.add(lbl_Car_2);
 		
 		lbl_Meta = new JLabel("");
@@ -66,18 +66,26 @@ public class Pistas extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				lbl_Car_1.setLocation(0,lbl_Car_1.getLocation().y);
-				lbl_Car_2.setLocation(0,lbl_Car_2.getLocation().y);
+				Run();
 				
-				Thread car_one = new Thread(new Carrera(lbl_Car_1, panelPistas));
-				Thread car_two = new Thread(new Carrera(lbl_Car_2, panelPistas));
-				
-				car_one.start();
-				car_two.start();
 			}
 		});
 		btnNewButton.setBounds(337, 491, 122, 40);
 		contentPane.add(btnNewButton);
+	}
+	
+	public void Run() {
+		
+
+		lbl_Car_1.setLocation(0,lbl_Car_1.getLocation().y);
+		lbl_Car_2.setLocation(0,lbl_Car_2.getLocation().y);
+		
+		Thread car_one = new Thread(new Carrera(lbl_Car_1, panelPistas));
+		Thread car_two = new Thread(new Carrera(lbl_Car_2, panelPistas));
+		
+		car_one.start();
+		car_two.start();
+		
 	}
 	
 	public JLabel getFirstCar() {

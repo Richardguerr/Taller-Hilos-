@@ -1,7 +1,7 @@
 package model;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+
 
 
 public class Crear_Jugador implements Runnable {
@@ -36,21 +36,37 @@ public class Crear_Jugador implements Runnable {
 	
 	@Override
 	public void run() {
+
+		run_Hilo();
+	}
+	
+	
+	
+	private void run_Hilo() {
+		
 		int auto1=0;
 		int auto2=0;
+		int auto3=0;
+		int auto4=0;
+		int auto5=0;
+		int meta=0;
 		
 
 		while (true){
 			
 			Dados.dadosRandom(img_d1_p, img_d2_p, lbl_res_p, lbl_res_pa_p,segundos,numuno,numdos,contador);
 			
-			try {
-				
 			auto1=game.getFirstCar().getLocation().x;
 			auto2=game.getSecondCar().getLocation().x;
+			auto3=game.getThirdCar().getLocation().x;
+			auto4=game.getFourthCar().getLocation().x;
+			auto5=game.getFifthCar().getLocation().x;
+			meta=game.getMeta().getLocation().x-160;
 			
-			if(auto1 < game.getMeta().getLocation().x-200 && auto2 < game.getMeta().getLocation().x-200) {
-				etiqueta.setLocation(etiqueta.getLocation().x+(Dados.contador_pn*3), etiqueta.getLocation().y);
+			
+			
+			if(auto1 < meta && auto2 < meta && auto3 < meta&& auto4 < meta && auto5 < meta) {
+				etiqueta.setLocation(etiqueta.getLocation().x+(Dados.contador_pn*10), etiqueta.getLocation().y);
 				game.repaint();
 				
 			}else {
@@ -59,29 +75,16 @@ public class Crear_Jugador implements Runnable {
 				
 			}
 			
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+		} 
 			
-		}
 		
-		if (etiqueta.getLocation().x>=game.getMeta().getLocation().x-200) {
-			if(auto1>auto2) {
-				JOptionPane.showMessageDialog(null, "Gano el carro uno!!");
-			}else if(auto2>auto1){
-				
-				JOptionPane.showMessageDialog(null, "Gano el carro dos!!");
-			}else {
-				
-				JOptionPane.showMessageDialog(null, "Empate!!");
-			}
-			
+		
+		
+		if (etiqueta.getLocation().x>=meta) {
+			Dados.Posiciones();
+			Dados.winner();
 				
 		}
-		
-		
-		
-		
 	}
 
 }
