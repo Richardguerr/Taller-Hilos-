@@ -2,6 +2,8 @@ package model;
 
 import javax.swing.JLabel;
 
+import Interfaz.Game;
+
 
 
 public class Crear_Jugador implements Runnable {
@@ -55,7 +57,9 @@ public class Crear_Jugador implements Runnable {
 		while (true){
 			
 			Dados.dadosRandom(img_d1_p, img_d2_p, lbl_res_p, lbl_res_pa_p,segundos,numuno,numdos,contador);
-			
+			Game.btn_New_Game.setEnabled(false);
+			Game.btn_NextGame.setEnabled(false);
+			Game.btn_Home.setEnabled(false);
 			auto1=game.getFirstCar().getLocation().x;
 			auto2=game.getSecondCar().getLocation().x;
 			auto3=game.getThirdCar().getLocation().x;
@@ -63,24 +67,21 @@ public class Crear_Jugador implements Runnable {
 			auto5=game.getFifthCar().getLocation().x;
 			meta=game.getMeta().getLocation().x-160;
 			
-			
-			
-			if(auto1 < meta && auto2 < meta && auto3 < meta&& auto4 < meta && auto5 < meta) {
+			if(auto1 < meta && auto2 < meta && auto3 < meta && auto4 < meta && auto5 < meta) {
 				etiqueta.setLocation(etiqueta.getLocation().x+(Dados.contador_pn*10), etiqueta.getLocation().y);
 				game.repaint();
 				
 			}else {
 				
+				Game.btn_New_Game.setEnabled(true);
+				Game.btn_NextGame.setEnabled(true);
+				Game.btn_Home.setEnabled(true);
 				break;
-				
 			}
-			
 		} 
-			
-		
-		
 		
 		if (etiqueta.getLocation().x>=meta) {
+			
 			Dados.Posiciones();
 			Dados.winner();
 				

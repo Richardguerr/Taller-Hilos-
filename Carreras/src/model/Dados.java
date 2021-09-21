@@ -2,9 +2,13 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import Interfaz.Game;
 
 
 public class Dados {
@@ -20,6 +24,7 @@ public class Dados {
 	private static Random random = new Random();
 	private static ArrayList<Integer> winner = new ArrayList<>();
 	private static ArrayList<Integer> posiciones = new ArrayList<>();
+	private static Icon icono = new ImageIcon(Game.class.getResource("/imagenes/winner.png"));
 
 	public static int contador_tirosp1=1;
 	public static int contador_tirosp2=1;
@@ -265,19 +270,24 @@ public static int comprobarDadoDos(int name_Dado, JLabel p_d2) {
 		winner.sort((o1,o2)->Integer.compare(o1, o2));
 		
 			if (winner.get(4)==auto1) {
-					JOptionPane.showMessageDialog(null, "El Player_One es el ganador!!");
+				JOptionPane.showMessageDialog(null, "El Player_One es el ganador !!",
+						"Winner...", JOptionPane.QUESTION_MESSAGE, icono);
 			}
 			else if (winner.get(4)==auto2) {
-					JOptionPane.showMessageDialog(null, "El Player_Two es el ganador!!");
+				JOptionPane.showMessageDialog(null, "El Player_Two es el ganador !!",
+						"Winner...", JOptionPane.QUESTION_MESSAGE, icono);
 			}
 			else if (winner.get(4)==auto3) {
-					JOptionPane.showMessageDialog(null, "El Player_Three es el ganador!!");
+				JOptionPane.showMessageDialog(null, "El Player_Three es el ganador !!",
+						"Winner...", JOptionPane.QUESTION_MESSAGE, icono);
 			}
 			else if (winner.get(4)==auto4) {
-					JOptionPane.showMessageDialog(null, "El Player_Four es el ganador!!");
+				JOptionPane.showMessageDialog(null, "El Player_Four es el ganador !!",
+						"Winner...", JOptionPane.QUESTION_MESSAGE, icono);
 			}
 			else if (winner.get(4)==auto5) {
-					JOptionPane.showMessageDialog(null, "El Player_Five es el ganador!!");
+				JOptionPane.showMessageDialog(null, "El Player_Five es el ganador !!",
+						"Winner...", JOptionPane.QUESTION_MESSAGE, icono);
 			}
 
 	}

@@ -1,8 +1,9 @@
-package model;
+package Interfaz;
 
 
 
 import java.awt.*;
+
 
 
 
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import Gestion.Gestion_Hilos;
+import model.Dados;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -78,9 +80,10 @@ public class Game extends JFrame {
 	private static JLabel pista;
 	
 	public static JLabel lbl_Meta;
-	private JButton btn_New_Game;
+	public static JButton btn_New_Game;
 	private JButton btn_Exit;
-	private JButton btn_NextGame;
+	public static JButton btn_NextGame;
+	public static JButton btn_Home;
 	private static 	int i=1;
 	private static Gestion_Hilos gestion_Hilos = new Gestion_Hilos();
 	private JLabel lbl_border_1;
@@ -96,6 +99,7 @@ public class Game extends JFrame {
 	 * Create the frame.
 	 */
 	public Game() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Game.class.getResource("/imagenes/logo_game.png")));
 		setTitle("Fast & Furios UPTC");
 		setResizable(false);
 
@@ -142,6 +146,7 @@ public class Game extends JFrame {
 		btn_NextGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+			
 				Game.lbl_Car_1.setLocation(0, Game.lbl_Car_1.getLocation().y);
 				Game.lbl_Car_2.setLocation(0, Game.lbl_Car_2.getLocation().y);
 				Game.lbl_Car_3.setLocation(0, Game.lbl_Car_3.getLocation().y);
@@ -152,7 +157,7 @@ public class Game extends JFrame {
 				
 			}
 		});
-		btn_NextGame.setBounds(154, 857, 140, 81);
+		btn_NextGame.setBounds(201, 858, 140, 81);
 		contentPane.add(btn_NextGame);
 		
 	}
@@ -217,7 +222,7 @@ public class Game extends JFrame {
 				System.exit(0);
 			}
 		});
-		btn_Exit.setBounds(571, 858, 140, 81);
+		btn_Exit.setBounds(638, 862, 140, 81);
 		contentPane.add(btn_Exit);
 		
 		
@@ -248,7 +253,7 @@ public class Game extends JFrame {
 	}
 	private void initJFrame() {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 987, 988);
 		setLocationRelativeTo(null);
 		
@@ -264,6 +269,24 @@ public class Game extends JFrame {
 		contentPane.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, new Color(240, 240, 240), new Color(255, 255, 255), new Color(105, 105, 105), new Color(160, 160, 160)), new LineBorder(new Color(180, 180, 180))));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		
+		btn_Home = new JButton("");
+		btn_Home.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Start start = new Start();
+				dispose();
+				start.setVisible(true);
+			}
+		});
+		btn_Home.setRolloverIcon(new ImageIcon(Game.class.getResource("/imagenes/home_2.png")));
+		btn_Home.setPressedIcon(new ImageIcon(Game.class.getResource("/imagenes/home_press.png")));
+		btn_Home.setRequestFocusEnabled(false);
+		btn_Home.setContentAreaFilled(false);
+		btn_Home.setIcon(new ImageIcon(Game.class.getResource("/imagenes/home_1.png")));
+		btn_Home.setBorder(null);
+		btn_Home.setBounds(529, 858, 85, 85);
+		contentPane.add(btn_Home);
 		
 		panel_game = new JPanel();
 		panel_game.setBorder(null);

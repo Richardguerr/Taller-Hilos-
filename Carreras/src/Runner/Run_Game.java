@@ -1,12 +1,14 @@
 package Runner;
-import model.Game;
+import Interfaz.Start;
 
 
 public class Run_Game {
 	 
 	public static void main(String[] args) {
-		Game game = new Game(); 
-		game.setVisible(true);
+
+		Start start = new Start();
+		start.setVisible(true);
+		
 	}
 	
 }

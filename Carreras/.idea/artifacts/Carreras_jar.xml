@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Carreras:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Carreras_jar</output-path>
+    <root id="archive" name="Carreras.jar">
+      <element id="module-output" name="Carreras" />
+    </root>
+  </artifact>
+</component>
