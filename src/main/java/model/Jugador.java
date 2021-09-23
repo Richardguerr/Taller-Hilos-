@@ -4,20 +4,32 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class Jugador {
+    private int id;
     private String name;
     private int nPartidas;
     private int nLanzamientos;
     private int totalScore;
     private int posGeneral;
-    private DateFormat hora;
+    //private DateFormat hora;
+    private String country;
 
-    public Jugador(String name){
-        this.name = name;
+    public Jugador(){
+        id = 0;
+        name = "";
         nPartidas = 0;
         nLanzamientos = 0;
         totalScore = 0;
         posGeneral = 0;
-        hora = new SimpleDateFormat();
+        //hora = new SimpleDateFormat();
+        country = "";
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -60,11 +72,24 @@ public class Jugador {
         this.posGeneral = posGeneral;
     }
 
-    public DateFormat getHora() {
-        return hora;
+    public String getCountry() {
+        return country;
     }
 
-    public void setHora(DateFormat hora) {
-        this.hora = hora;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return "Jugador{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", nPartidas=" + nPartidas +
+                ", nLanzamientos=" + nLanzamientos +
+                ", totalScore=" + totalScore +
+                ", posGeneral=" + posGeneral +
+                ", country='" + country + '\'' +
+                '}';
     }
 }

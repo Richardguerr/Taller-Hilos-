@@ -156,6 +156,7 @@ public class Dados {
             p_re.setText("Puntaje: " + contadorp);
             p_pa.setText("<html>Puntaje<br>Acumulado: " + acumuladop5);
 
+
         }
 
 

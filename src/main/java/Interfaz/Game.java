@@ -14,10 +14,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import Gestion.Gestion_Hilos;
+import control.Ranking;
 import model.Dados;
+import model.Jugador;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.CompoundBorder;
@@ -92,6 +96,8 @@ public class Game extends JFrame {
     private JLabel lbl_borde_pista_1;
     private JLabel lbl_table_1;
     private JButton btn_New_Game_1;
+
+    private List<Jugador> jugadores;
 
 
 
@@ -262,7 +268,7 @@ public class Game extends JFrame {
     }
 
     private void InitComponents() {
-
+        jugadores = new Ranking().rankingJsonToArrayList();
         contentPane = new JPanel();
         contentPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         contentPane.setBackground(new Color(60, 179, 113));
@@ -346,14 +352,14 @@ public class Game extends JFrame {
         lbl_suma_res_pa_p2.setBounds(227, 155, 172, 48);
         panel_game.add(lbl_suma_res_pa_p2);
 
-        lbl_p1 = new JLabel("Player One");
+        lbl_p1 = new JLabel(jugadores.get(0).getName());
         lbl_p1.setForeground(new Color(0, 0, 0));
         lbl_p1.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_p1.setFont(new Font("Ravie", Font.BOLD, 16));
         lbl_p1.setBounds(28, 77, 163, 22);
         panel_game.add(lbl_p1);
 
-        lbl_p2 = new JLabel("Player Two");
+        lbl_p2 = new JLabel(jugadores.get(1).getName());
         lbl_p2.setForeground(Color.BLACK);
         lbl_p2.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_p2.setFont(new Font("Ravie", Font.BOLD, 16));
@@ -384,7 +390,7 @@ public class Game extends JFrame {
         lbl_tiro_p2.setBounds(227, 111, 131, 22);
         panel_game.add(lbl_tiro_p2);
 
-        lbl_p3 = new JLabel("Player Three");
+        lbl_p3 = new JLabel(jugadores.get(2).getName());
         lbl_p3.setForeground(Color.BLACK);
         lbl_p3.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_p3.setFont(new Font("Ravie", Font.BOLD, 16));
@@ -422,7 +428,7 @@ public class Game extends JFrame {
         lbl_p3_p.setBounds(404, 277, 131, 28);
         panel_game.add(lbl_p3_p);
 
-        lbl_p4 = new JLabel("Player Four");
+        lbl_p4 = new JLabel(jugadores.get(3).getName());
         lbl_p4.setForeground(Color.BLACK);
         lbl_p4.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_p4.setFont(new Font("Ravie", Font.BOLD, 16));
@@ -460,7 +466,7 @@ public class Game extends JFrame {
         lbl_p4_p.setBounds(577, 277, 131, 28);
         panel_game.add(lbl_p4_p);
 
-        lbl_p5 = new JLabel("Player Five");
+        lbl_p5 = new JLabel(jugadores.get(4).getName());
         lbl_p5.setForeground(Color.BLACK);
         lbl_p5.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_p5.setFont(new Font("Ravie", Font.BOLD, 16));
