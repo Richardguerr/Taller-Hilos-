@@ -1,6 +1,7 @@
 package Gestion;
 
 import Interfaz.Game;
+import control.Ranking;
 import model.Crear_Jugador;
 
 public class Gestion_Hilos {

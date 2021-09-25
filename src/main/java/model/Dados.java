@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.Icon;
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import Interfaz.Game;
+import control.Ranking;
 
 
 public class Dados {
@@ -25,6 +27,7 @@ public class Dados {
     private static ArrayList<Integer> winner = new ArrayList<>();
     private static ArrayList<Integer> posiciones = new ArrayList<>();
     private static Icon icono = new ImageIcon(Game.class.getResource("/imagenes/winner.png"));
+    public static List<Jugador> jugadores = new Ranking().rankingJsonToArrayList();
 
     public static int contador_tirosp1=1;
     public static int contador_tirosp2=1;
@@ -67,7 +70,9 @@ public class Dados {
             acumuladop1+=contadorp;
             p_re.setText("Puntaje: " + contadorp);
             p_pa.setText("<html>Puntaje<br>Acumulado: " + acumuladop1);
-
+            jugadores.get(0).setTotalScore(acumuladop1);
+            jugadores.get(0).setnLanzamientos(contador_tirosp1);
+            jugadores.get(0).setnPartidas(Game.getI());
 
         }else if (contadorp==2) {
 
@@ -97,6 +102,9 @@ public class Dados {
 
             p_re.setText("Puntaje: " + contadorp);
             p_pa.setText("<html>Puntaje<br>Acumulado: " + acumuladop2);
+            jugadores.get(1).setTotalScore(acumuladop2);
+            jugadores.get(1).setnLanzamientos(contador_tirosp2);
+            jugadores.get(1).setnPartidas(Game.getI());
 
         }
         else if (contadorp==3) {
@@ -118,6 +126,10 @@ public class Dados {
             p_re.setText("Puntaje: " + contadorp);
             p_pa.setText("<html>Puntaje<br>Acumulado: " + acumuladop3);
 
+            jugadores.get(2).setTotalScore(acumuladop3);
+            jugadores.get(2).setnLanzamientos(contador_tirosp3);
+            jugadores.get(2).setnPartidas(Game.getI());
+
         }else if (contadorp==4) {
 
 
@@ -136,6 +148,10 @@ public class Dados {
 
             p_re.setText("Puntaje: " + contadorp);
             p_pa.setText("<html>Puntaje<br>Acumulado: " + acumuladop4);
+
+            jugadores.get(3).setTotalScore(acumuladop4);
+            jugadores.get(3).setnLanzamientos(contador_tirosp4);
+            jugadores.get(3).setnPartidas(Game.getI());
 
         }else if (contadorp==5) {
 
@@ -156,6 +172,9 @@ public class Dados {
             p_re.setText("Puntaje: " + contadorp);
             p_pa.setText("<html>Puntaje<br>Acumulado: " + acumuladop5);
 
+            jugadores.get(4).setTotalScore(acumuladop5);
+            jugadores.get(4).setnLanzamientos(contador_tirosp5);
+            jugadores.get(4).setnPartidas(Game.getI());
 
         }
 
@@ -271,23 +290,23 @@ public class Dados {
         winner.sort((o1,o2)->Integer.compare(o1, o2));
 
         if (winner.get(4)==auto1) {
-            JOptionPane.showMessageDialog(null, "El Player_One es el ganador !!",
+            JOptionPane.showMessageDialog(null, jugadores.get(0).getName()+" es el ganador !!",
                     "Winner...", JOptionPane.QUESTION_MESSAGE, icono);
         }
         else if (winner.get(4)==auto2) {
-            JOptionPane.showMessageDialog(null, "El Player_Two es el ganador !!",
+            JOptionPane.showMessageDialog(null, jugadores.get(1).getName()+" es el ganador !!",
                     "Winner...", JOptionPane.QUESTION_MESSAGE, icono);
         }
         else if (winner.get(4)==auto3) {
-            JOptionPane.showMessageDialog(null, "El Player_Three es el ganador !!",
+            JOptionPane.showMessageDialog(null, jugadores.get(2).getName()+" es el ganador !!",
                     "Winner...", JOptionPane.QUESTION_MESSAGE, icono);
         }
         else if (winner.get(4)==auto4) {
-            JOptionPane.showMessageDialog(null, "El Player_Four es el ganador !!",
+            JOptionPane.showMessageDialog(null, jugadores.get(3).getName()+" es el ganador !!",
                     "Winner...", JOptionPane.QUESTION_MESSAGE, icono);
         }
         else if (winner.get(4)==auto5) {
-            JOptionPane.showMessageDialog(null, "El Player_Five es el ganador !!",
+            JOptionPane.showMessageDialog(null, jugadores.get(4).getName()+" es el ganador !!",
                     "Winner...", JOptionPane.QUESTION_MESSAGE, icono);
         }
 

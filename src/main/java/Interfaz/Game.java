@@ -88,7 +88,7 @@ public class Game extends JFrame {
     private JButton btn_Exit;
     public static JButton btn_NextGame;
     public static JButton btn_Home;
-    private static 	int i=1;
+    private static 	int i=0;
     private static Gestion_Hilos gestion_Hilos = new Gestion_Hilos();
     private JLabel lbl_border_1;
     private JLabel lbl_border_4;
@@ -98,8 +98,12 @@ public class Game extends JFrame {
     private JButton btn_New_Game_1;
 
     private List<Jugador> jugadores;
+    public Ranking r;
+    public Dados d;
 
-
+    public List<Jugador> getJugadores(){
+        return jugadores;
+    }
 
     /**
      * Create the frame.
@@ -136,6 +140,10 @@ public class Game extends JFrame {
     }
     public JLabel getMeta() {
         return lbl_Meta;
+    }
+
+    public static int getI(){
+        return i-1;
     }
 
     private void button_NextGame() {
@@ -254,8 +262,7 @@ public class Game extends JFrame {
         btn_New_Game_1.setBorder(null);
         btn_New_Game_1.setBounds(4, 857, 140, 81);
         contentPane.add(btn_New_Game_1);
-
-
+        new Ranking().calcularRanking();
     }
     private void initJFrame() {
 
@@ -268,7 +275,9 @@ public class Game extends JFrame {
     }
 
     private void InitComponents() {
-        jugadores = new Ranking().rankingJsonToArrayList();
+        r = new Ranking();
+        jugadores = r.rankingJsonToArrayList();
+
         contentPane = new JPanel();
         contentPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         contentPane.setBackground(new Color(60, 179, 113));
@@ -283,6 +292,7 @@ public class Game extends JFrame {
                 Start start = new Start();
                 dispose();
                 start.setVisible(true);
+                r.updateJsonFile(r.updateRankingJSON(Dados.jugadores));
             }
         });
         btn_Home.setRolloverIcon(new ImageIcon(Game.class.getResource("/imagenes/home_2.png")));

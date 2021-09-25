@@ -2,6 +2,8 @@ package model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
+
 
 public class Jugador {
     private int id;
@@ -12,6 +14,15 @@ public class Jugador {
     private int posGeneral;
     //private DateFormat hora;
     private String country;
+
+    public static Comparator<Jugador> compTotalScore = new Comparator<Jugador>() {
+        @Override
+        public int compare(Jugador o1, Jugador o2) {
+            String totalScore = String.valueOf(o1.getTotalScore());
+            return totalScore.compareTo(String.valueOf(o2.getTotalScore()));
+        }
+    };
+
 
     public Jugador(){
         id = 0;

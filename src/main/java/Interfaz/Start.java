@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Gestion.Gestion_Start;
+import control.Ranking;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -64,7 +65,6 @@ public class Start extends JFrame {
         btn_Start.setRequestFocusEnabled(false);
         btn_Start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
 
                 Thread start =new Thread(new Gestion_Start(lbl_loading,btn_Start,exitFrame));
                 start.start();

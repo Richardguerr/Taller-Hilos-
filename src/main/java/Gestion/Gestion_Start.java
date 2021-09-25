@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import Interfaz.Game;
 
 
+
 public class Gestion_Start implements Runnable{
 
 
@@ -36,6 +37,7 @@ public class Gestion_Start implements Runnable{
             lbl.setVisible(false);
             start.dispose();
             game.setVisible(true);
+
 
 
         } catch (InterruptedException e) {
