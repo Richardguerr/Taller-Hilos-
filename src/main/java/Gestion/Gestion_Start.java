@@ -4,13 +4,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import Interfaz.Game;
-
+import control.Control;
 
 
 public class Gestion_Start implements Runnable{
 
 
-
+    private Control control = new Control();
     private Game game = new Game();
 
     private JLabel lbl;

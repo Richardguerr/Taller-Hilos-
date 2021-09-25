@@ -10,7 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import Interfaz.Game;
-import control.Ranking;
+import control.Control;
+
 
 
 public class Dados {
@@ -27,7 +28,7 @@ public class Dados {
     private static ArrayList<Integer> winner = new ArrayList<>();
     private static ArrayList<Integer> posiciones = new ArrayList<>();
     private static Icon icono = new ImageIcon(Game.class.getResource("/imagenes/winner.png"));
-    public static List<Jugador> jugadores = new Ranking().rankingJsonToArrayList();
+    public static List<Jugador> jugadores = Control.r.rankingJsonToArrayList();
 
     public static int contador_tirosp1=1;
     public static int contador_tirosp2=1;

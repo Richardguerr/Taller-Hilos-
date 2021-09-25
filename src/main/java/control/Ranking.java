@@ -11,18 +11,23 @@ import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 
 import java.util.*;
+import java.util.logging.FileHandler;
 
 
 public class Ranking {
     private static final String RUTA = "src/main/resources/persistencia/ranking.json";
-    private List<Jugador> ranking;
-    private List<Jugador> data;
+    private List<Jugador> dadosJugadores;
+    private List<Jugador> datosJSON;
+    private List<Jugador> lista;
 
     public Ranking(){
-        ranking = new ArrayList<>();
+        dadosJugadores = new ArrayList<>();
+        datosJSON = new ArrayList<>();
+        lista = new ArrayList<>();
     }
 
     public List<Jugador> rankingJsonToArrayList() {
+        datosJSON = new ArrayList<>();
         File data = new File(RUTA);
         int i = 1;
 
@@ -84,7 +89,7 @@ public class Ranking {
                                     break;
                             }
                             if(i == 7){
-                                ranking.add(j);
+                                datosJSON.add(j);
                                 j = new Jugador();
                                 i = 1;
                             }else {
@@ -97,7 +102,7 @@ public class Ranking {
         }catch (FileNotFoundException e){
             e.printStackTrace();
         }
-        return ranking;
+        return datosJSON;
     }
 
     public JsonArray updateRankingJSON(List<Jugador> jugadores){
@@ -153,35 +158,38 @@ public class Ranking {
     }
 
     public void updateJsonFile(JsonArray data){
-        try(
+        try{
+            System.out.println(data.get(0).toString());
+            PrintWriter writer = new PrintWriter(RUTA);
+            writer.print("");
+            writer.close();
             FileWriter fw = new FileWriter(RUTA);
 
-            JsonWriter jsonWriter = Json.createWriter(fw);) {
-
-
+            JsonWriter jsonWriter = Json.createWriter(fw);
             jsonWriter.writeArray(data);
+            jsonWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public List<Jugador> calcularRanking() {
-        data = rankingJsonToArrayList();
-        List<Jugador> updatePlayers = data;
-        ranking = Dados.jugadores;
+        List<Jugador> updatePlayers = rankingJsonToArrayList();
+
+        dadosJugadores = Dados.jugadores;
 
 
-        for (int i = 0; ranking.size()>i;i++) {
-            Jugador juData = data.get(i);
-            Jugador juUpdate = ranking.get(i);
+        for (int i = 0; i < updatePlayers.size();i++) {
+
+            Jugador juData = updatePlayers.get(i);
+            Jugador juUpdate = dadosJugadores.get(i);
 
             updatePlayers.get(i).setnPartidas(juUpdate.getnPartidas()+juData.getnPartidas());
             updatePlayers.get(i).setTotalScore(juUpdate.getTotalScore()+juData.getTotalScore());
-            updatePlayers.get(i).setnLanzamientos(juUpdate.getnLanzamientos()+juData.getnLanzamientos());
+            updatePlayers.get(i).setnLanzamientos(juUpdate.getnLanzamientos()+juData.getnLanzamientos()-1);
 
 
         }
-        System.out.println("TORETO SOCORE "+ updatePlayers.get(0).getTotalScore());
         updatePlayers = calcularRanking(updatePlayers);
         return updatePlayers;
 

@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import Gestion.Gestion_Hilos;
+import control.Control;
 import control.Ranking;
 import model.Dados;
 import model.Jugador;
@@ -97,13 +98,8 @@ public class Game extends JFrame {
     private JLabel lbl_table_1;
     private JButton btn_New_Game_1;
 
-    private List<Jugador> jugadores;
-    public Ranking r;
-    public Dados d;
 
-    public List<Jugador> getJugadores(){
-        return jugadores;
-    }
+
 
     /**
      * Create the frame.
@@ -262,7 +258,6 @@ public class Game extends JFrame {
         btn_New_Game_1.setBorder(null);
         btn_New_Game_1.setBounds(4, 857, 140, 81);
         contentPane.add(btn_New_Game_1);
-        new Ranking().calcularRanking();
     }
     private void initJFrame() {
 
@@ -275,9 +270,6 @@ public class Game extends JFrame {
     }
 
     private void InitComponents() {
-        r = new Ranking();
-        jugadores = r.rankingJsonToArrayList();
-
         contentPane = new JPanel();
         contentPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         contentPane.setBackground(new Color(60, 179, 113));
@@ -292,9 +284,10 @@ public class Game extends JFrame {
                 Start start = new Start();
                 dispose();
                 start.setVisible(true);
-                r.updateJsonFile(r.updateRankingJSON(Dados.jugadores));
+                Control.r.updateJsonFile(Control.r.updateRankingJSON(Control.r.calcularRanking()));
             }
         });
+
         btn_Home.setRolloverIcon(new ImageIcon(Game.class.getResource("/imagenes/home_2.png")));
         btn_Home.setPressedIcon(new ImageIcon(Game.class.getResource("/imagenes/home_press.png")));
         btn_Home.setRequestFocusEnabled(false);
@@ -362,14 +355,16 @@ public class Game extends JFrame {
         lbl_suma_res_pa_p2.setBounds(227, 155, 172, 48);
         panel_game.add(lbl_suma_res_pa_p2);
 
-        lbl_p1 = new JLabel(jugadores.get(0).getName());
+        List<String> nombres = Control.nombresJugadores;
+
+        lbl_p1 = new JLabel(nombres.get(0));
         lbl_p1.setForeground(new Color(0, 0, 0));
         lbl_p1.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_p1.setFont(new Font("Ravie", Font.BOLD, 16));
         lbl_p1.setBounds(28, 77, 163, 22);
         panel_game.add(lbl_p1);
 
-        lbl_p2 = new JLabel(jugadores.get(1).getName());
+        lbl_p2 = new JLabel(nombres.get(1));
         lbl_p2.setForeground(Color.BLACK);
         lbl_p2.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_p2.setFont(new Font("Ravie", Font.BOLD, 16));
@@ -400,7 +395,7 @@ public class Game extends JFrame {
         lbl_tiro_p2.setBounds(227, 111, 131, 22);
         panel_game.add(lbl_tiro_p2);
 
-        lbl_p3 = new JLabel(jugadores.get(2).getName());
+        lbl_p3 = new JLabel(nombres.get(2));
         lbl_p3.setForeground(Color.BLACK);
         lbl_p3.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_p3.setFont(new Font("Ravie", Font.BOLD, 16));
@@ -438,7 +433,7 @@ public class Game extends JFrame {
         lbl_p3_p.setBounds(404, 277, 131, 28);
         panel_game.add(lbl_p3_p);
 
-        lbl_p4 = new JLabel(jugadores.get(3).getName());
+        lbl_p4 = new JLabel(nombres.get(3));
         lbl_p4.setForeground(Color.BLACK);
         lbl_p4.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_p4.setFont(new Font("Ravie", Font.BOLD, 16));
@@ -476,7 +471,7 @@ public class Game extends JFrame {
         lbl_p4_p.setBounds(577, 277, 131, 28);
         panel_game.add(lbl_p4_p);
 
-        lbl_p5 = new JLabel(jugadores.get(4).getName());
+        lbl_p5 = new JLabel(nombres.get(4));
         lbl_p5.setForeground(Color.BLACK);
         lbl_p5.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_p5.setFont(new Font("Ravie", Font.BOLD, 16));
