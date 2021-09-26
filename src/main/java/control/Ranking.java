@@ -159,7 +159,6 @@ public class Ranking {
 
     public void updateJsonFile(JsonArray data){
         try{
-            System.out.println(data.get(0).toString());
             PrintWriter writer = new PrintWriter(RUTA);
             writer.print("");
             writer.close();
@@ -197,7 +196,6 @@ public class Ranking {
 
     private List<Jugador> calcularRanking(List<Jugador> lista){
         List<Jugador> updatePlayers = new ArrayList<>();
-        System.out.println("listaaaaaa "+lista.size());
         int[] score = new int[5];
         int i = 0;
         for (Jugador j : lista) {
@@ -226,9 +224,7 @@ public class Ranking {
             }
         }
 
-        for (Jugador jd: updatePlayers) {
-            System.out.println(jd.toString());
-        }
+
         return updatePlayers;
     }
 

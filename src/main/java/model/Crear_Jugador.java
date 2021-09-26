@@ -1,9 +1,8 @@
 package model;
 
-import javax.swing.JLabel;
-
 import Interfaz.Game;
 
+import javax.swing.JLabel;
 
 
 public class Crear_Jugador implements Runnable {
