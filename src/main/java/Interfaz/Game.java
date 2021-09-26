@@ -99,6 +99,7 @@ public class Game extends JFrame {
     private JButton btn_New_Game_1;
 
 
+
     /**
      * Create the frame.
      */
@@ -116,6 +117,7 @@ public class Game extends JFrame {
 
 
     }
+
 
     public JLabel getFirstCar() {
         return lbl_Car_1;
@@ -165,7 +167,7 @@ public class Game extends JFrame {
 
             }
         });
-        btn_NextGame.setBounds(201, 575, 140, 81);
+        btn_NextGame.setBounds(60, 575, 140, 81);
         contentPane.add(btn_NextGame);
 
     }
@@ -208,7 +210,7 @@ public class Game extends JFrame {
 
             }
         });
-        btn_New_Game.setBounds(365, 575, 140, 81);
+        btn_New_Game.setBounds(220, 575, 140, 81);
         contentPane.add(btn_New_Game);
 
     }
@@ -230,7 +232,7 @@ public class Game extends JFrame {
                 System.exit(0);
             }
         });
-        btn_Exit.setBounds(638, 575, 140, 81);
+        btn_Exit.setBounds(750, 575, 140, 81);
         contentPane.add(btn_Exit);
 
 
@@ -285,7 +287,7 @@ public class Game extends JFrame {
         btn_Home.setContentAreaFilled(false);
         btn_Home.setIcon(new ImageIcon(Game.class.getResource("/imagenes/home_1.png")));
         btn_Home.setBorder(null);
-        btn_Home.setBounds(529, 575, 85, 85);
+        btn_Home.setBounds(640, 575, 85, 85);
         contentPane.add(btn_Home);
     }
 
@@ -613,7 +615,7 @@ public class Game extends JFrame {
         contentPane.add(panel_carrera);
         panel_carrera.setLayout(null);
 
-        lbl_Car_1 = new JLabel("D.T");
+        lbl_Car_1 = new JLabel("P1");
         lbl_Car_1.setForeground(Color.YELLOW);
         lbl_Car_1.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 14));
         lbl_Car_1.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -622,7 +624,7 @@ public class Game extends JFrame {
         lbl_Car_1.setBounds(0, 11, 170, 76);
         panel_carrera.add(lbl_Car_1);
 
-        lbl_Car_2 = new JLabel("B.O");
+        lbl_Car_2 = new JLabel("P2");
         lbl_Car_2.setForeground(Color.PINK);
         lbl_Car_2.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 14));
         lbl_Car_2.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -635,7 +637,7 @@ public class Game extends JFrame {
         lbl_Meta.setBounds(831, 0, 70, 511);
         panel_carrera.add(lbl_Meta);
 
-        lbl_Car_3 = new JLabel("L.O");
+        lbl_Car_3 = new JLabel("P3");
         lbl_Car_3.setForeground(Color.ORANGE);
         lbl_Car_3.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 14));
         lbl_Car_3.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -643,7 +645,7 @@ public class Game extends JFrame {
         lbl_Car_3.setBounds(0, 214, 170, 88);
         panel_carrera.add(lbl_Car_3);
 
-        lbl_Car_4 = new JLabel("R.P");
+        lbl_Car_4 = new JLabel("P4");
         lbl_Car_4.setForeground(Color.GREEN);
         lbl_Car_4.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 14));
         lbl_Car_4.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -652,7 +654,7 @@ public class Game extends JFrame {
         lbl_Car_4.setBounds(0, 322, 170, 76);
         panel_carrera.add(lbl_Car_4);
 
-        lbl_Car_5 = new JLabel("T.P");
+        lbl_Car_5 = new JLabel("P5");
         lbl_Car_5.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_Car_5.setForeground(Color.CYAN);
         lbl_Car_5.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 14));

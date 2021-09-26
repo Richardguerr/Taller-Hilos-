@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Interfaz.Game;
+import Interfaz.RankingInterfaz;
 import control.Control;
 
 
@@ -14,13 +15,15 @@ public class Gestion_Start implements Runnable{
     private Control control = new Control();
     private Game game = new Game();
 
+
     private JLabel lbl;
     private JFrame start;
     private JButton button;
 
 
 
-    public Gestion_Start(JLabel lbl, JButton button,JFrame start) {
+
+    public Gestion_Start(JLabel lbl, JButton button, JFrame start) {
         this.lbl=lbl;
         this.start=start;
         this.button=button;
@@ -29,7 +32,6 @@ public class Gestion_Start implements Runnable{
 
     @Override
     public void run() {
-
         try {
 
             lbl.setVisible(true);
@@ -44,7 +46,6 @@ public class Gestion_Start implements Runnable{
         } catch (InterruptedException e) {
 
         }
-
     }
 
 
