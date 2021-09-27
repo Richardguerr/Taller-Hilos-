@@ -7,6 +7,7 @@ import java.awt.*;
 
 
 
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +17,6 @@ import javax.swing.SwingConstants;
 import Gestion.Gestion_Hilos;
 import control.Control;
 import model.Dados;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -105,8 +105,6 @@ public class Game extends JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(Game.class.getResource("/imagenes/logo_game.png")));
         setTitle("Fast & Furios UPTC");
         setResizable(false);
-
-
         initJFrame();
         InitComponents();
         button_NewGame();
@@ -144,13 +142,13 @@ public class Game extends JFrame {
 
         btn_NextGame = new JButton("");
         btn_NextGame.setContentAreaFilled(false);
-        btn_NextGame.setBorderPainted(false);
         btn_NextGame.setRequestFocusEnabled(false);
         btn_NextGame.setRolloverIcon(new ImageIcon(Game.class.getResource("/imagenes/next_level_2.png")));
         btn_NextGame.setPressedIcon(new ImageIcon(Game.class.getResource("/imagenes/next_level_1_press.png")));
         btn_NextGame.setIcon(new ImageIcon(Game.class.getResource("/imagenes/next_level_1.png")));
         btn_NextGame.setBorder(null);
         btn_NextGame.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btn_NextGame.setBounds(55, 567, 155, 93);
         btn_NextGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -165,7 +163,7 @@ public class Game extends JFrame {
 
             }
         });
-        btn_NextGame.setBounds(60, 575, 140, 81);
+
         contentPane.add(btn_NextGame);
 
     }
@@ -225,9 +223,7 @@ public class Game extends JFrame {
         btn_Exit.setBorder(null);
         btn_Exit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(i!=1){
-                    Control.r.updateJsonFile(Control.r.updateRankingJSON(Control.r.calcularRanking()));
-                }
+
                 JOptionPane.showMessageDialog(null, "El programa ha finalizado correctamente!!");
                 System.exit(0);
             }
@@ -262,7 +258,7 @@ public class Game extends JFrame {
     private void initJFrame() {
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 1320, 700);
+        setBounds(100, 100, 1331, 700);
         setLocationRelativeTo(null);
 
 
@@ -277,9 +273,7 @@ public class Game extends JFrame {
                 Start start = new Start();
                 dispose();
                 start.setVisible(true);
-                if(i!=1){
-                    Control.r.updateJsonFile(Control.r.updateRankingJSON(Control.r.calcularRanking()));
-                }
+                Control.r.updateJsonFile(Control.r.updateRankingJSON(Control.r.calcularRanking()));
             }
         });
 
@@ -299,7 +293,7 @@ public class Game extends JFrame {
         lbl_partida.setHorizontalAlignment(SwingConstants.CENTER);
         lbl_partida.setHorizontalTextPosition(SwingConstants.CENTER);
         lbl_partida.setFont(new Font("Ravie", Font.BOLD, 38));
-        lbl_partida.setBounds(0, 5, 901, 30);
+        lbl_partida.setBounds(0, 0, 901, 52);
         contentPane.add(lbl_partida);
     }
 
@@ -681,9 +675,9 @@ public class Game extends JFrame {
         setContentPane(contentPane);
 
         panelNpartida();
-       btnHome();
-       panelPuntajes();
-       panelCarrera();
+        btnHome();
+        panelPuntajes();
+        panelCarrera();
 
     }
 }

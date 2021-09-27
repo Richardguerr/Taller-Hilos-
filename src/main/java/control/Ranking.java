@@ -1,5 +1,6 @@
 package control;
 
+import Interfaz.Start;
 import com.sun.tools.javac.Main;
 import model.Dados;
 import model.Jugador;
@@ -24,23 +25,23 @@ public class Ranking {
     private static final String RUTA = "persistencia/ranking.json";
     private List<Jugador> dadosJugadores;
     private List<Jugador> datosJSON;
-    private List<Jugador> lista;
+    public static List<Jugador> updatePlayers;
+    private static File file;
 
     public Ranking(){
 
         dadosJugadores = new ArrayList<>();
         datosJSON = new ArrayList<>();
-        lista = new ArrayList<>();
     }
 
-    public File getResourceAsFile(String resourcePath) {
+    public static File getResourceAsFile(String resourcePath) {
         try {
             InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath);
             if (in == null) {
                 return null;
             }
 
-            File tempFile = File.createTempFile(String.valueOf(in.hashCode()), ".tmp");
+            File tempFile = File.createTempFile(String.valueOf(in.hashCode()), ".json");
             tempFile.deleteOnExit();
 
             try (FileOutputStream out = new FileOutputStream(tempFile)) {
@@ -51,7 +52,8 @@ public class Ranking {
                     out.write(buffer, 0, bytesRead);
                 }
             }
-            return tempFile;
+            file = tempFile;
+            return file;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -192,7 +194,7 @@ public class Ranking {
     public void updateJsonFile(JsonArray data){
         try{
             //PrintWriter writer = new PrintWriter(RUTA);
-            File file = getResourceAsFile(RUTA);
+            //File file = getResourceAsFile(RUTA);
             PrintWriter writer = new PrintWriter(file);
             writer.print("");
             writer.close();
@@ -208,9 +210,9 @@ public class Ranking {
     }
 
     public List<Jugador> calcularRanking() {
-        List<Jugador> updatePlayers = rankingJsonToArrayList();
-
+        //List<Jugador> updatePlayers = rankingJsonToArrayList();
         dadosJugadores = Dados.jugadores;
+        updatePlayers = Start.jugadores;
 
 
         for (int i = 0; i < updatePlayers.size();i++) {
@@ -222,7 +224,6 @@ public class Ranking {
             updatePlayers.get(i).setTotalScore(juUpdate.getTotalScore()+juData.getTotalScore());
             updatePlayers.get(i).setnLanzamientos(juUpdate.getnLanzamientos()+juData.getnLanzamientos()-1);
 
-
         }
         updatePlayers = calcularRanking(updatePlayers);
         return updatePlayers;
@@ -230,13 +231,13 @@ public class Ranking {
     }
 
     private List<Jugador> calcularRanking(List<Jugador> lista){
-        List<Jugador> updatePlayers = new ArrayList<>();
+        List<Jugador> updatePlayers2 = new ArrayList<>();
         int[] score = new int[5];
         int i = 0;
         for (Jugador j : lista) {
             score[i] = j.getTotalScore();
-            updatePlayers.add(j);
-            updatePlayers.get(i).setId(i);
+            updatePlayers2.add(j);
+            updatePlayers2.get(i).setId(i);
             i++;
         }
         Arrays.sort(score);
@@ -249,9 +250,9 @@ public class Ranking {
         }
         i = 0;
         int j = 0;
-        while (updatePlayers.size() > i) {
-            if (updatePlayers.get(i).getTotalScore() == scoreOrdenado[j]) {
-                updatePlayers.get(i).setPosGeneral(j + 1);
+        while (updatePlayers2.size() > i) {
+            if (updatePlayers2.get(i).getTotalScore() == scoreOrdenado[j]) {
+                updatePlayers2.get(i).setPosGeneral(j + 1);
                 j = 0;
                 i++;
             } else {
@@ -260,6 +261,10 @@ public class Ranking {
         }
 
 
+        updatePlayers = updatePlayers2;
+        System.out.println(updatePlayers2.get(0).toString());
+        System.out.println(updatePlayers.get(0).toString());
+        Start.jugadores = updatePlayers;
         return updatePlayers;
     }
 

@@ -1,7 +1,9 @@
 package Interfaz;
 
 import Gestion.Gestion_Reloj;
+
 import control.Ranking;
+import model.Dados;
 import model.Jugador;
 
 import javax.swing.*;
@@ -9,24 +11,34 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.Comparator;
 import java.util.List;
 
 
 public class RankingInterfaz extends JFrame {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3149039581740401107L;
     private JPanel panelPrincipal;
     private JButton btn_back;
     private JLabel principal_title;
-    private List<Jugador> jugadores = new Ranking().rankingJsonToArrayList();
-    private Gestion_Reloj gestion_reloj;
-    private Thread reloj;
+    //public static List<Jugador> jugadores = new Ranking().rankingJsonToArrayList();
+    //public static List<Jugador> jugadores = Dados.jugadores;
+    public static List<Jugador> jugadores = Start.jugadores;
+    private static JLabel lblhora;
+    private static JLabel lblhora_p2;
+    private static JLabel lblhora_p3;
+    private static JLabel lblhora_p4;
+    private static JLabel lblhora_p5;
 
-    public Thread getReloj() {
-        return reloj;
-    }
+
 
     public RankingInterfaz(){
+        setIconImage(Toolkit.getDefaultToolkit().getImage(Start.class.getResource("/imagenes/logo_game.png")));
+        setTitle("Ranking Fast & Furios");
         initComponents();
     }
 
@@ -72,14 +84,14 @@ public class RankingInterfaz extends JFrame {
         //TOTAL SCORE
         JLabel tScore = new JLabel("PUNTAJE GENERAL");
         tScore.setForeground(Color.WHITE);
-        tScore.setBounds(785, 70, 260, 30);
+        tScore.setBounds(763, 70, 260, 30);
         tScore.setFont(new Font("Ravie", Font.PLAIN, 20));
         panelPrincipal.add(tScore);
 
         //HORA
         JLabel hora = new JLabel("HORA");
         hora.setForeground(Color.WHITE);
-        hora.setBounds(800, 70, 460, 30);
+        hora.setBounds(1005, 70, 164, 30);
         hora.setFont(new Font("Ravie", Font.PLAIN, 20));
         hora.setHorizontalAlignment(SwingConstants.CENTER);
         panelPrincipal.add(hora);
@@ -127,12 +139,11 @@ public class RankingInterfaz extends JFrame {
 
         //TOTAL SCORE
         JLabel tScore = new JLabel(String.valueOf(j.getTotalScore()));
+        tScore.setHorizontalAlignment(SwingConstants.CENTER);
         tScore.setForeground(Color.WHITE);
-        tScore.setBounds(800, y, 260, 30);
+        tScore.setBounds(785, y, 260, 30);
         tScore.setFont(new Font("Ravie", Font.PLAIN, 20));
         panelPrincipal.add(tScore);
-
-
 
 
     }
@@ -144,20 +155,21 @@ public class RankingInterfaz extends JFrame {
         principal_title.setHorizontalTextPosition(SwingConstants.CENTER);
         principal_title.setFont(new Font("Ravie", Font.BOLD, 38));
         principal_title.setForeground(Color.WHITE);
-        principal_title.setBounds(0, 20, 1200, 30);
+        principal_title.setBounds(0, 20, 1200, 52);
         panelPrincipal.add(principal_title);
     }
 
     private void btn_Back(){
-        btn_back = new JButton();
-        btn_back.setContentAreaFilled(false);
-        btn_back.setBorderPainted(false);
-        btn_back.setRequestFocusEnabled(false);
+        btn_back = new JButton("");
         btn_back.setRolloverIcon(new ImageIcon(Game.class.getResource("/imagenes/home_2.png")));
         btn_back.setPressedIcon(new ImageIcon(Game.class.getResource("/imagenes/home_press.png")));
+        btn_back.setRequestFocusEnabled(false);
+        btn_back.setContentAreaFilled(false);
         btn_back.setIcon(new ImageIcon(Game.class.getResource("/imagenes/home_1.png")));
         btn_back.setBorder(null);
-        btn_back.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btn_back.setBounds(1058, 542, 85, 85);
+
+
         btn_back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Start start = new Start();
@@ -165,11 +177,27 @@ public class RankingInterfaz extends JFrame {
                 dispose();
             }
         });
-        btn_back.setBounds(1050, 560, 140, 81);
+
         panelPrincipal.add(btn_back);
     }
 
+    private void reloj(){
+
+        Thread reloj1 = new Thread(new Gestion_Reloj(lblhora, jugadores.get(0).getCountry()));
+        Thread reloj2 = new Thread(new Gestion_Reloj(lblhora_p2,jugadores.get(1).getCountry()));
+        Thread reloj3 = new Thread(new Gestion_Reloj(lblhora_p3,jugadores.get(2).getCountry()));
+        Thread reloj4 = new Thread(new Gestion_Reloj(lblhora_p4,jugadores.get(3).getCountry()));
+        Thread reloj5 = new Thread(new Gestion_Reloj(lblhora_p5,jugadores.get(4).getCountry()));
+
+        reloj1.start();
+        reloj2.start();
+        reloj3.start();
+        reloj4.start();
+        reloj5.start();
+
+    }
     private void initComponents() {
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 1200, 675);
         setLocationRelativeTo(null);
@@ -181,6 +209,7 @@ public class RankingInterfaz extends JFrame {
         btn_Back();
         title();
         subTitle();
+
         jugadores.sort(new Comparator<Jugador>() {
             @Override
             public int compare(Jugador o1, Jugador o2) {
@@ -195,7 +224,48 @@ public class RankingInterfaz extends JFrame {
         fila(jugadores.get(3), 410);
         fila(jugadores.get(4), 510);
 
+        lblhora = new JLabel("00:00:00");
+        lblhora.setFont(new Font("Papyrus", Font.ITALIC, 19));
+        lblhora.setForeground(Color.ORANGE);
+        lblhora.setBounds(1058, 108, 111, 30);
+        panelPrincipal.add(lblhora);
+
+        lblhora_p2 = new JLabel("00:00:00");
+        lblhora_p2.setFont(new Font("Papyrus", Font.ITALIC, 19));
+        lblhora_p2.setForeground(Color.ORANGE);
+        lblhora_p2.setBounds(1058, 208, 111, 30);
+        panelPrincipal.add(lblhora_p2);
+
+        lblhora_p3 = new JLabel("00:00:00");
+        lblhora_p3.setFont(new Font("Papyrus", Font.ITALIC, 19));
+        lblhora_p3.setForeground(Color.ORANGE);
+        lblhora_p3.setBounds(1058, 307, 111, 30);
+        panelPrincipal.add(lblhora_p3);
+
+        lblhora_p4 = new JLabel("00:00:00");
+        lblhora_p4.setFont(new Font("Papyrus", Font.ITALIC, 19));
+        lblhora_p4.setForeground(Color.ORANGE);
+        lblhora_p4.setBounds(1058, 404, 111, 30);
+        panelPrincipal.add(lblhora_p4);
+
+        lblhora_p5 = new JLabel("00:00:00");
+        lblhora_p5.setFont(new Font("Papyrus", Font.ITALIC, 19));
+        lblhora_p5.setForeground(Color.ORANGE);
+        lblhora_p5.setBounds(1058, 501, 111, 30);
+        panelPrincipal.add(lblhora_p5);
+
+        JButton btn_back_1 = new JButton();
+        btn_back_1.setRequestFocusEnabled(false);
+        btn_back_1.setContentAreaFilled(false);
+        btn_back_1.setBorderPainted(false);
+        btn_back_1.setBorder(null);
+        btn_back_1.setBounds(801, 539, 140, 97);
+        panelPrincipal.add(btn_back_1);
+
+        reloj();
     }
+
+
 
     public JPanel getPanelPrincipal() {
         return panelPrincipal;
@@ -205,8 +275,4 @@ public class RankingInterfaz extends JFrame {
     public JButton getBtn_back() {
         return btn_back;
     }
-
-
-
-
 }

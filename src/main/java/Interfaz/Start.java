@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 
 import Gestion.Gestion_Ranking;
 import Gestion.Gestion_Start;
+import control.Ranking;
+import model.Jugador;
 
 
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 
 import java.awt.Toolkit;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class Start extends JFrame {
@@ -38,7 +41,9 @@ public class Start extends JFrame {
     private JPanel lbl_ranking;
     private JButton back;
 
-    private RankingInterfaz r = new RankingInterfaz();
+    private RankingInterfaz r;
+
+    public static List<Jugador> jugadores = new Ranking().rankingJsonToArrayList();
 
 
 
@@ -54,6 +59,7 @@ public class Start extends JFrame {
 
 
     private void button_ranking() {
+        r = new RankingInterfaz();
         lbl_ranking = r.getPanelPrincipal();
         exitFrame = this;
         back = r.getBtn_back();

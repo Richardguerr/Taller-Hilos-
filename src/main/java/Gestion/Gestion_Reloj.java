@@ -11,12 +11,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class Gestion_Reloj implements Runnable{
-    private Thread hilo;
+public class Gestion_Reloj extends Thread{
     public JLabel lblHora;
     private String hora;
     private String minutos;
+    private String country;
     private String segundos;
+
+    public Gestion_Reloj() {
+
+    }
 
 
     public JLabel getLblHora() {
@@ -24,25 +28,13 @@ public class Gestion_Reloj implements Runnable{
     }
 
 
-    public Gestion_Reloj(JFrame frame, JLabel hora) {
-        hilo = new Thread(this);
-        hilo.start();
-        lblHora = new JLabel("00:00:00");
-        lblHora.setFont(new Font("Papyrus", Font.ITALIC, 19));
-        lblHora.setForeground(Color.ORANGE);
-        lblHora.setBounds(135, 44, 111, 30);
-        frame.add(lblHora);
+    public Gestion_Reloj(JLabel Labelhora, String country) {
+        this.country=country;
+        this.lblHora=Labelhora;
+
+
     }
 
-
-    public static String Fecha() {
-
-        Date fecha = new Date();
-        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/YYYY");
-
-        return formatofecha.format(fecha);
-
-    }
 
     public void hora() {
 
@@ -61,17 +53,105 @@ public class Gestion_Reloj implements Runnable{
     @Override
     public void run() {
 
-        Thread current = Thread.currentThread();
 
-        while (current == hilo) {
 
-            if(lblHora!=null){
-                hora();
-                lblHora.setText(hora + ":" + minutos + ":" + segundos);
+        while (true) {
+
+
+            hora();
+            int hour=Integer.parseInt(hora);
+            int minute = Integer.parseInt(minutos);
+            if (country.equals("USA")){
+
+                if(hour>=23 && minute>0){
+                    hour = 0;
+                    hora = String.valueOf(hour);
+                    lblHora.setText(hora + ":" + minutos + ":" + segundos);
+                }else if(hour<23){
+
+                    hour=hour+1;
+                    hora = String.valueOf(hour);
+                    lblHora.setText(hora + ":" + minutos + ":" + segundos);
+                }
+
+
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
+            else if (country.equals("BRZ")){
+
+                if(hour>=22 && minute>0 && hour<=23){
+                    if (hour==23){
+
+                        hour = 1;
+                        hora = String.valueOf(hour);
+                        lblHora.setText(hora + ":" + minutos + ":" + segundos);
+                    }else if (hour==22){
+
+                        hour = 0;
+                        hora = String.valueOf(hour);
+                        lblHora.setText(hora + ":" + minutos + ":" + segundos);
+
+                    }
+                }else if(hour<22 ){
+
+                    hour=hour+2;
+                    hora = String.valueOf(hour);
+                    lblHora.setText(hora + ":" + minutos + ":" + segundos);
+                }
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }else if (country.equals("CRC")){
+
+
+                if(hour==0 && minute>0 ){
+                    hour=23;
+                    hora = String.valueOf(hour);
+                    lblHora.setText(hora + ":" + minutos + ":" + segundos);
+
+                }else if(hour>0 ){
+
+                    hour=hour-1;
+                    hora = String.valueOf(hour);
+                    lblHora.setText(hora + ":" + minutos + ":" + segundos);
+                }
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+
+
+
 
         }
 
+
     }
+
+    private void zona_horario(){
+
+
+
+
+
+    }
+
+
+
 
 }
